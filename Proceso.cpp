@@ -3,7 +3,7 @@
 
 
 
-Proceso::Proceso(std::string nom, std::string pos, std::string des) {
+Proceso::Proceso(char nom, std::string pos, std::string des) {
 
 	nombre = nom;
 	posee = pos;
@@ -12,19 +12,18 @@ Proceso::Proceso(std::string nom, std::string pos, std::string des) {
 
 }
 
-/*bool Proceso::sigue(Proceso pros, std::string secLis) {
-
-if ( pros.getPosee == "ninguno") {
-
-return false;
+Proceso::Proceso getP(list<Proceso> _list, int _i) {
+	list<Proceso>::iterator it = _list.begin();
+	for (int i = 0; i<_i; i++) {
+		++it;
+	}
+	return *it;
 }
 
-return true;
 
 
-}*/
 
-void Proceso::setNombre(std::string nom) {
+void Proceso::setNombre(char nom) {
 
 	nombre = nom;
 

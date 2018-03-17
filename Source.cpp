@@ -2,28 +2,29 @@
 #include "Proceso.h"
 #include <iostream>
 #include <list>
+#include <vector>
 using namespace std;
 
 int main(int, char*[]) {
 
 
-	Proceso p1("r", "nin", "a");
+	Proceso p1("r", "ninguno", "a");
 	Proceso p2("a", "r", "s");
-	Proceso p3("c", "nin", "s");
-	Proceso p4("s", "a, c, f, d", "ninguno");
+	Proceso p4("c", "ninguno", "s");
+	Proceso p3("s", "a, c, f, d", "ninguno");
 	Proceso p5("f", "w", "s");
 	Proceso p6("w", "ninguno", "f");
 
 
 	Proceso p7("d", "u", "s,t");
-	Proceso p8("u", "nin", "d,g");
+	Proceso p8("u", "ninguno", "d,g");
 	Proceso p9("t", "d,b", "e");
 	Proceso p10("b", "ninguno", "t");
 	Proceso p11("e", "t", "v");
 	Proceso p12("v", "e", "g");
 	Proceso p13("g", "v", "u");
 
-	std::list<Proceso> lp;
+	std::vector<Proceso> lp;
 
 	lp.push_back(p1);
 	lp.push_back(p2);
@@ -39,15 +40,46 @@ int main(int, char*[]) {
 	lp.push_back(p12);
 	lp.push_back(p13);
 
+	string proc = "";
+
+	list<std::string> p;
+
+	
+
+	
+
+	
+	for (vector<Proceso>::iterator i = lp.begin()+10; i != lp.end(); ++i) {
 
 
-	for (list<Proceso>::iterator i = lp.begin(); i != lp.end(); ++i) {
-		cout << i->getNombre() << endl;
-	    cout << i->getPosee() << endl;
-		cout << i->getDesea() << endl;
+		cout << "Proceso : " << i->getNombre() << "->" << "Desea : " << i->getDesea() << endl;
+
+		p.push_back(i->getNombre());
+
+
+		if (i->getDesea() == "ninguno") {
+		
+			cout << i->getNombre() << " no tiene arcos" << endl;
+
+			for (list<std::string>::iterator it = p.begin(); it != p.end(); ++it) {
+
+				cout << *it;
+
+			}
+			
+
+			cout << endl;
+			cout << endl;
+
+			system("pause");
+			return 0;
+		
+		}
+		
+	
 		cout << endl;
 	}
-
+	
 	/*lp.add_end(p1);
 	lp.add_end(p2);
 	lp.add_end(p3);
