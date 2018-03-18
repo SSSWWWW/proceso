@@ -3,6 +3,7 @@
 #include <iostream>
 #include <list>
 #include <vector>
+#include <algorithm>
 using namespace std;
 
 int main(int, char*[]) {
@@ -13,16 +14,23 @@ int main(int, char*[]) {
 	Proceso p4("c", "ninguno", "s");
 	Proceso p3("s", "a, c, f, d", "ninguno");
 	Proceso p5("f", "w", "s");
-	Proceso p6("w", "ninguno", "f");
+	Proceso p6("s", "ninguno", "ninguno");
+	Proceso p7("w", "ninguno", "f");
+	Proceso p8("f", "w", "s");
 
+	Proceso p9("d", "u", "s,t");
 
-	Proceso p7("d", "u", "s,t");
-	Proceso p8("u", "ninguno", "d,g");
-	Proceso p9("t", "d,b", "e");
-	Proceso p10("b", "ninguno", "t");
+	Proceso p10("t", "d,b", "e");
 	Proceso p11("e", "t", "v");
 	Proceso p12("v", "e", "g");
 	Proceso p13("g", "v", "u");
+	Proceso p14("u", "ninguno", "d,g");
+	Proceso p15("b", "ninguno", "t");
+
+	Proceso p16("e", "t", "v");
+	Proceso p17("u", "ninguno", "d,g");
+
+	
 
 	std::vector<Proceso> lp;
 
@@ -39,7 +47,10 @@ int main(int, char*[]) {
 	lp.push_back(p11);
 	lp.push_back(p12);
 	lp.push_back(p13);
-
+	lp.push_back(p14);
+	lp.push_back(p15);
+	lp.push_back(p16);
+	lp.push_back(p17);
 	string proc = "";
 
 	list<std::string> p;
@@ -49,12 +60,35 @@ int main(int, char*[]) {
 	
 
 	
-	for (vector<Proceso>::iterator i = lp.begin()+10; i != lp.end(); ++i) {
+	for (vector<Proceso>::iterator i = lp.begin()+8; i != lp.end(); ++i) {
 
 
 		cout << "Proceso : " << i->getNombre() << "->" << "Desea : " << i->getDesea() << endl;
 
 		p.push_back(i->getNombre());
+
+
+		
+
+
+		if ((std::find(p.begin(), p.end(), i->getDesea()) != p.end())) {
+
+			cout << i->getNombre() << " hay ciclo, termina proceso" << endl;
+
+			for (list<std::string>::iterator it = p.begin(); it != p.end(); ++it) {
+
+				cout << *it;
+
+			}
+
+
+			cout << endl;
+			cout << endl;
+
+			system("pause");
+			return 0;
+
+		}
 
 
 		if (i->getDesea() == "ninguno") {
