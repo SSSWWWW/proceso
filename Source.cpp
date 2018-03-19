@@ -55,80 +55,182 @@ int main(int, char*[]) {
 
 	list<std::string> p;
 
-	
+	std::string nom="";
+	std::string des="";
+	std::string pos="";
+	Proceso pp("", "", "");
 
 	
 
-	
-	for (vector<Proceso>::iterator i = lp.begin()+8; i != lp.end(); ++i) {
+	int op = 22;
+
+	do {
 
 
-		cout << "Proceso : " << i->getNombre() << "->" << "Desea : " << i->getDesea() << endl;
-
-		p.push_back(i->getNombre());
-
-
+		cout << " MENU " << endl;
+		cout << " 1 - Listar procesos " << endl;
+		cout << " 2 - Escoger proceso " << endl;
+		cout << " 3 - Agregar proceso proceso " << endl;
+		cout << " 4 - Borrar proceso" << endl;
 		
+		cout << " 0 - salir " << endl;
+
+		cin >> op;
+		int con = 0;
+
+		switch (op) {
 
 
-		if ((std::find(p.begin(), p.end(), i->getDesea()) != p.end())) {
+		case 1:
 
-			cout << i->getNombre() << " hay ciclo, termina proceso" << endl;
+			for (vector<Proceso>::iterator i = lp.begin(); i != lp.end(); ++i) {
+			
+				
+				con++;
+			
+				cout << con << " Proceso : " << i->getNombre() << "   Posee : "<< i->getPosee() << "  Desea : " << i->getDesea() << endl;
 
-			for (list<std::string>::iterator it = p.begin(); it != p.end(); ++it) {
-
-				cout << *it;
-
+			
+			
 			}
 
 
-			cout << endl;
-			cout << endl;
 
-			system("pause");
-			return 0;
+
+
+
+			break;
+
+
+		case 2: {
+
+			int num = 0;
+
+			cout << "digite proceso ";
+			cin >> num;
+
+			num = num - 1;
+
+			for (vector<Proceso>::iterator i = lp.begin() + num; i != lp.end(); ++i) {
+
+
+				cout << "Proceso : " << i->getNombre() << "->" << "Desea : " << i->getDesea() << endl;
+
+				p.push_back(i->getNombre());
+
+
+
+
+
+				if ((std::find(p.begin(), p.end(), i->getDesea()) != p.end())) {
+
+					cout << i->getNombre() << " hay ciclo, termina proceso" << endl;
+
+					for (list<std::string>::iterator it = p.begin(); it != p.end(); ++it) {
+
+						cout << *it;
+
+					}
+
+
+					cout << endl;
+					cout << endl;
+
+					system("pause");
+					return 0;
+
+				}
+
+
+				if (i->getDesea() == "ninguno") {
+
+					cout << i->getNombre() << " no tiene arcos" << endl;
+
+					for (list<std::string>::iterator it = p.begin(); it != p.end(); ++it) {
+
+						cout << *it;
+
+					}
+
+
+					cout << endl;
+					cout << endl;
+
+					system("pause");
+					return 0;
+
+				}
+
+
+				cout << endl;
+			}
+
+			break;
 
 		}
 
 
-		if (i->getDesea() == "ninguno") {
-		
-			cout << i->getNombre() << " no tiene arcos" << endl;
+		case 3: {
 
-			for (list<std::string>::iterator it = p.begin(); it != p.end(); ++it) {
-
-				cout << *it;
-
-			}
 			
 
-			cout << endl;
-			cout << endl;
+			cout << "digite nombre proceso ";
+			cin >> nom;
+			cin.get();
 
-			system("pause");
-			return 0;
+			cout << "digite a quien desea el proceso ";
+			cin >> des;
+			cin.get();
+
+			cout << "digite a quien posee el proceso ";
+			cin >> pos;
+			cin.get();
+
+			pp.setNombre(nom);
+			pp.setDesea(des);
+			pp.setPosee(pos);
+
+
+			lp.push_back(pp);
+
+			break;
+
+		}
+
+		case 4: {
+		
+			std::string nom;
+			cout << "digite numero de proceso " << endl;
+			cin.get();
+			cin >> nom;
+
+
+			for (vector<Proceso>::iterator i = lp.begin(); i != lp.end(); ++i) {
+
+				if (i->getNombre() == nom) {
+
+					i = lp.erase(i);
+
+				}
+
+
+
+			}
+
+			break;
+		
+		
+		
+		
 		
 		}
-		
-	
-		cout << endl;
-	}
-	
-	/*lp.add_end(p1);
-	lp.add_end(p2);
-	lp.add_end(p3);
-	lp.add_end(p4);
-	lp.add_end(p5);
-	lp.add_end(p6);
-	lp.add_end(p7);
-	lp.add_end(p8);
-	lp.add_end(p9);
-	lp.add_end(p10);
-	lp.add_end(p11);
-	lp.add_end(p12);
-	lp.add_end(p13);
 
-	lp.print();*/
+
+
+
+		}
+
+	} while (op != 0);
 
 
 
