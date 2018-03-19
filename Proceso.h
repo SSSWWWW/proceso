@@ -4,7 +4,7 @@
 
 #include<string>
 #include<iostream>
-
+#include <list>
 
 class Proceso
 {
@@ -33,7 +33,7 @@ public:
 	void setNombre(std::string nombre);
 
 
-	bool sigue(Proceso pros, std::string secLis);
+	//bool sigue(Proceso pros, std::string secLis);
 
 	std::string getDesea() { return desea; }
 	std::string getPosee() { return posee; }
@@ -44,4 +44,19 @@ public:
 	std::string getNombre() { return nombre; }
 
 
+
+	Proceso getP(std::list<Proceso> _list, int _i);
+	
+	
+
 };
+
+
+
+inline std::ostream& operator<< (std::ostream &out, Proceso& p)
+{
+	
+	out << "\nNombre : " << p.getNombre() << "\nPosee : " << p.getPosee() << "\nDesea : " << p.getDesea() <<  "\n";
+
+	return out;
+}
