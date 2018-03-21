@@ -67,35 +67,52 @@ int main(int, char*[]) {
 	do {
 
 
-		cout << " MENU " << endl;
+		cout << " PROCESOS " << endl;
 		cout << " 1 - Listar procesos " << endl;
 		cout << " 2 - Escoger proceso " << endl;
 		cout << " 3 - Agregar proceso proceso " << endl;
 		cout << " 4 - Borrar proceso" << endl;
 		
 		cout << " 0 - salir " << endl;
-
-		cin >> op;
 		int con = 0;
+	
+		cin >> op;
+		
+
+		while (cin.fail()) {
+			cout << "Digite un numero: ";
+			cin >> op;
+			if (cin.fail()) {
+				cin.clear(); cin.ignore();
+				cout << "Digite numero de nuevo! " << endl;
+			}
+			else break;
+		}
+		
+		
+
 
 		switch (op) {
 
 
 		case 1:
 
+
+
 			for (vector<Proceso>::iterator i = lp.begin(); i != lp.end(); ++i) {
 			
 				
 				con++;
 			
+
 				cout << con << " Proceso : " << i->getNombre() << "   Posee : "<< i->getPosee() << "  Desea : " << i->getDesea() << endl;
 
 			
 			
 			}
 
-
-
+			system("pause");
+			system("CLS");
 
 
 
@@ -104,10 +121,24 @@ int main(int, char*[]) {
 
 		case 2: {
 
-			int num = 0;
+			int num =1;
 
-			cout << "digite proceso ";
+			cout << "digite proceso  ";
 			cin >> num;
+
+			
+			while (1)
+			{
+				if (cin.fail())
+				{
+					cin.clear();
+					cin.ignore(numeric_limits<streamsize>::max(), '\n');
+					cout << "numero incorrecto, digite el numero de proceso" << endl;
+					cin >> num;
+				}
+				if (!cin.fail())
+					break;
+			}
 
 			num = num - 1;
 
@@ -165,6 +196,9 @@ int main(int, char*[]) {
 				cout << endl;
 			}
 
+			system("pause");
+			system("CLS");
+
 			break;
 
 		}
@@ -193,6 +227,8 @@ int main(int, char*[]) {
 
 			lp.push_back(pp);
 
+			system("pause");
+			system("CLS");
 			break;
 
 		}
@@ -217,6 +253,8 @@ int main(int, char*[]) {
 
 			}
 
+			system("pause");
+			system("CLS");
 			break;
 		
 		
