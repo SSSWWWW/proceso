@@ -11,29 +11,25 @@ int main(int, char*[]) {
 
 	Proceso p1("r", "ninguno", "a");
 	Proceso p2("a", "r", "s");
+	Proceso p3 ("b" , "ninguno", "t");
 	Proceso p4("c", "ninguno", "s");
-	Proceso p3("s", "a, c, f, d", "ninguno");
-	Proceso p5("f", "w", "s");
-	Proceso p6("s", "ninguno", "ninguno");
-	Proceso p7("w", "ninguno", "f");
-	Proceso p8("f", "w", "s");
-
-	Proceso p9("d", "u", "s,t");
-
-	Proceso p10("t", "d,b", "e");
-	Proceso p11("e", "t", "v");
-	Proceso p12("v", "e", "g");
+	Proceso p5("s", "a, c, f, d", "ninguno");
+	Proceso p6("d", "u", "s");
+	Proceso p7("t", "d,b", "e");
+	Proceso p8("e", "t", "v");
+	Proceso p9("f", "w", "s");
+	Proceso p10("u", "ninguno", "d"); //(d,g)
+	Proceso p11("v", "e", "g");
+	Proceso p12("w", "ninguno", "f");
 	Proceso p13("g", "v", "u");
-	Proceso p14("u", "ninguno", "d,g");
-	Proceso p15("b", "ninguno", "t");
-
-	Proceso p16("e", "t", "v");
-	Proceso p17("u", "ninguno", "d,g");
+	
 
 	
 
 	std::vector<Proceso> lp;
 
+	
+	
 	lp.push_back(p1);
 	lp.push_back(p2);
 	lp.push_back(p3);
@@ -47,13 +43,31 @@ int main(int, char*[]) {
 	lp.push_back(p11);
 	lp.push_back(p12);
 	lp.push_back(p13);
-	lp.push_back(p14);
-	lp.push_back(p15);
-	lp.push_back(p16);
-	lp.push_back(p17);
+	//lp.push_back(p14);
+	//lp.push_back(p15);
+	//lp.push_back(p16);
+	//lp.push_back(p17);
 	string proc = "";
+	
+	std::vector<std::string> lpp;
+	lpp.push_back("r");
+	lpp.push_back("a");
+	lpp.push_back("b");
+	lpp.push_back("c");
+	lpp.push_back("s");
+	lpp.push_back("d");
+	lpp.push_back("t");
+	lpp.push_back("e");
+	lpp.push_back("f");
+	lpp.push_back("u");
+	lpp.push_back("v");
+	lpp.push_back("w");
+	lpp.push_back("g");
 
 	list<std::string> p;
+
+
+	
 
 	std::string nom="";
 	std::string des="";
@@ -123,8 +137,11 @@ int main(int, char*[]) {
 
 			int num =1;
 
+			std::string des = "";
 			cout << "digite proceso  ";
 			cin >> num;
+			
+			int con = 0;
 
 			
 			while (1)
@@ -144,17 +161,66 @@ int main(int, char*[]) {
 
 			for (vector<Proceso>::iterator i = lp.begin() + num; i != lp.end(); ++i) {
 
+				con ++;
+				
 
+				if(con == 1){
+					
 				cout << "Proceso : " << i->getNombre() << "->" << "Desea : " << i->getDesea() << endl;
+				
+				des = i->getDesea();
 
 				p.push_back(i->getNombre());
+				i = lp.begin();
+				
+				}
+				
+				
+				
+				if(con > 1){
+					
+				
+				//	cout << "prueba " << des << "  " << i->getNombre()<<endl;
+					if(des == i->getNombre()){
+						
+						
+						cout << "Proceso : " << i->getNombre() << "->" << "Desea : " << i->getDesea() << endl;
+						
+						des = i->getDesea();
+						p.push_back(i->getNombre());
+					}
+					
+				
+					
+				}
+				
+			/*	if((std::find(lp.begin(), lp.end(),  i->getDesea()) !=lp.end())){
+					
+					
+					cout << "igual" << endl;
+					
+				}*/
+				
+				
+			/*	for (vector<Proceso>::iterator it = lp.begin(); it != lp.end(); ++it){
+					
+					if(it->getNombre() == i->getDesea()){
+						
+						cout << "Proceso : " << i->getNombre() << "->" << "Desea : " << i->getDesea() << endl;
+						
+						p.push_back(i->getNombre());
+						
+					}
+					
+					
+				}*/
+
+              
 
 
+				if (des == i->getNombre() && (std::find(p.begin(), p.end(), i->getDesea()) != p.end())) {
 
-
-
-				if ((std::find(p.begin(), p.end(), i->getDesea()) != p.end())) {
-
+					i = lp.begin();
 					cout << i->getNombre() << " hay ciclo, termina proceso" << endl;
 
 					for (list<std::string>::iterator it = p.begin(); it != p.end(); ++it) {
@@ -171,10 +237,12 @@ int main(int, char*[]) {
 					return 0;
 
 				}
+				
+				
 
 
-				if (i->getDesea() == "ninguno") {
-
+				if (des == i->getNombre() && i->getDesea() == "ninguno") {
+					i = lp.begin();
 					cout << i->getNombre() << " no tiene arcos" << endl;
 
 					for (list<std::string>::iterator it = p.begin(); it != p.end(); ++it) {
@@ -191,6 +259,8 @@ int main(int, char*[]) {
 					return 0;
 
 				}
+				
+				
 
 
 				cout << endl;
